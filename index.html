@@ -126,7 +126,7 @@
             </div>
         </div>
 
-        <!-- TAB 3: REKAP TOTAL (DENGAN FITUR SEARCH & KARTU STATISTIK) -->
+        <!-- TAB 3: REKAP TOTAL -->
         <div id="viewRekap" style="display: none;" class="fade-in space-y-6">
             
             <!-- KARTU STATISTIK DINAMIS -->
@@ -148,7 +148,6 @@
             <!-- FITUR KONTROL: SEARCH & SORT -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <div class="bg-slate-100 px-5 py-4 border-b border-slate-200 flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
-                    <!-- Input Search Nama -->
                     <div class="flex-1 relative">
                         <input type="text" id="searchNamaInput" placeholder="Cari nama siswa di sini..." class="w-full pl-4 pr-10 py-2 text-sm border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-inner">
                         <span class="absolute right-3 top-2.5 text-slate-400">
@@ -236,9 +235,6 @@
             return 0;
         }
 
-        // =========================================================
-        // LOGIKA PROSES & RENDER DATA KE TABEL
-        // =========================================================
         window.renderSistemTabel = function() {
             const sekarang = Date.now();
             const tujuhHariLalu = sekarang - (7 * 24 * 60 * 60 * 1000);
@@ -247,7 +243,6 @@
             renderKategoriRekapTotal();
         };
 
-        // Render Tab 2: Mingguan
         function renderKategoriMinggu(batasWaktu) {
             const tbody = document.getElementById('tableBodyMinggu');
             const sortType = document.getElementById('sortDropdownMinggu').value;
@@ -278,30 +273,41 @@
             }).join('');
         }
 
-        // Render Tab 3: Rekap Total + Fitur Hitung Kalkulasi Statistik & Search
         function renderKategoriRekapTotal() {
             const tbody = document.getElementById('tableBodyRekap');
             const sortType = document.getElementById('sortDropdownRekap').value;
             const keyword = document.getElementById('searchNamaInput').value.toLowerCase().trim();
             
-            // 1. Jalankan Filter Pencarian Nama
+            // 1. Filter Pencarian untuk Baris Tabel (Menggunakan 'includes' agar variasi nama tetap terlihat)
             let filteredData = [...window.daftarAbsensiTotal];
             if (keyword !== '') {
                 filteredData = filteredData.filter(item => item.nama.toLowerCase().includes(keyword));
             }
 
-            // 2. Kalkulasi Kalkulator Indikator (Hanya menghitung data yang tersaring di layar)
+            // 2. Logika Baru Perbaikan Kartu Statistik (Pengecekan Nama Sama Persis)
+            let statsData = [...window.daftarAbsensiTotal];
+            if (keyword !== '') {
+                const adaNamaSamaPersis = window.daftarAbsensiTotal.some(item => item.nama.toLowerCase() === keyword);
+                
+                if (adaNamaSamaPersis) {
+                    // Jika teks input sama persis dengan nama seseorang, kunci statistik hanya untuk nama itu saja
+                    statsData = window.daftarAbsensiTotal.filter(item => item.nama.toLowerCase() === keyword);
+                } else {
+                    // Jika belum ada nama yang sama persis (masih proses mengetik), kosongkan statistik agar data tidak rancu
+                    statsData = [];
+                }
+            }
+
             let countHadir = 0;
             let countIzin = 0;
             let countSakit = 0;
 
-            filteredData.forEach(item => {
+            statsData.forEach(item => {
                 if (item.status === 'Hadir') countHadir++;
                 else if (item.status === 'Izin') countIzin++;
                 else if (item.status === 'Sakit') countSakit++;
             });
 
-            // Suntik angka statistik ke elemen kartu atas
             document.getElementById('statHadir').textContent = countHadir;
             document.getElementById('statIzin').textContent = countIzin;
             document.getElementById('statSakit').textContent = countSakit;
@@ -311,13 +317,11 @@
                 return;
             }
 
-            // 3. Jalankan Penyortiran
             if (sortType === 'terbaru') filteredData.sort((a,b) => getTimestamp(b) - getTimestamp(a));
             else if (sortType === 'terlama') filteredData.sort((a,b) => getTimestamp(a) - getTimestamp(b));
             else if (sortType === 'nama') filteredData.sort((a,b) => a.nama.localeCompare(b.nama));
             else if (sortType === 'kelas') filteredData.sort((a,b) => a.kelas.localeCompare(b.kelas));
 
-            // 4. Gambar data ke baris tabel
             tbody.innerHTML = filteredData.map(item => {
                 let badge = item.status === 'Hadir' ? 'bg-green-100 text-green-700' : (item.status === 'Izin' ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700');
                 let timeStr = item.timestamp ? new Date(getTimestamp(item)).toLocaleString('id-ID', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-';
@@ -332,14 +336,10 @@
             }).join('');
         }
 
-        // Event Listener untuk Fitur Filter Real-time
         document.getElementById('searchNamaInput').addEventListener('input', renderKategoriRekapTotal);
         document.getElementById('sortDropdownMinggu').addEventListener('change', window.renderSistemTabel);
         document.getElementById('sortDropdownRekap').addEventListener('change', window.renderSistemTabel);
 
-        // =========================================================
-        // LOGIKA INTERAKSI NAVIGASI TAB
-        // =========================================================
         const btnForm = document.getElementById('tabFormBtn');
         const btnMinggu = document.getElementById('tabMingguBtn');
         const btnRekap = document.getElementById('tabRekapBtn');
@@ -379,7 +379,6 @@
             window.renderSistemTabel();
         });
 
-        // Logika Pilihan Status Form
         document.querySelectorAll('input[name="status"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 document.querySelectorAll('.status-label').forEach(label => label.className = "status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-white border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50");
@@ -395,7 +394,6 @@
             });
         });
 
-        // Proses Kirim Data Form
         document.getElementById('absensiForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
