@@ -26,22 +26,21 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-4">
                 <div class="flex items-center">
                     <div class="flex items-center justify-center w-10 h-10 bg-blue-600 rounded-xl text-white shadow-sm mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-slate-900 leading-tight">English Club</h1>
+                        <h1 class="text-xl font-bold text-slate-900 leading-tight flex items-center">
+                            English Club
+                            <!-- Indikator Database -->
+                            <span id="dbStatusBadge" class="ml-2 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-700 uppercase tracking-wider">Mode Lokal</span>
+                        </h1>
                         <p class="text-xs text-slate-500 font-medium">Portal Absensi Digital</p>
                     </div>
                 </div>
                 
-                <!-- Tab Tombol -->
                 <div class="flex space-x-1 bg-slate-100 p-1 rounded-lg">
-                    <button id="tabFormBtn" type="button" class="flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-white text-blue-700 shadow-sm transition-all">
-                        Isi Absen
-                    </button>
-                    <button id="tabDataBtn" type="button" class="flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md text-slate-600 hover:text-slate-900 transition-all">
-                        Data Rekap
-                    </button>
+                    <button id="tabFormBtn" type="button" class="flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-white text-blue-700 shadow-sm transition-all">Isi Absen</button>
+                    <button id="tabDataBtn" type="button" class="flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md text-slate-600 hover:text-slate-900 transition-all">Data Rekap</button>
                 </div>
             </div>
         </div>
@@ -49,73 +48,35 @@
 
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- ==================== TAB 1: FORM ABSENSI ==================== -->
+        <!-- TAB 1: FORM ABSENSI -->
         <div id="viewForm" class="fade-in block">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden max-w-lg mx-auto p-6 sm:p-8">
                 <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Halo! Silakan Absen 👋</h2>
-                
                 <form id="absensiForm" class="space-y-6">
-                    <!-- Input Nama -->
                     <div>
-                        <label for="nama" class="block text-sm font-semibold text-slate-700 mb-1.5">Nama Lengkap</label>
-                        <input type="text" id="nama" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-slate-50 focus:bg-white">
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Nama Lengkap</label>
+                        <input type="text" id="nama" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                     </div>
-
-                    <!-- Pilih Kelas (HARDCODED SESUAI PERMINTAAN) -->
                     <div>
-                        <label for="kelas" class="block text-sm font-semibold text-slate-700 mb-1.5">Kelas</label>
-                        <select id="kelas" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-slate-50 focus:bg-white cursor-pointer">
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Kelas</label>
+                        <select id="kelas" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none cursor-pointer bg-white">
                             <option value="" disabled selected>Pilih Kelas Anda</option>
-                            <optgroup label="Kelas 7">
-                                <option value="7A">7A</option>
-                                <option value="7B">7B</option>
-                                <option value="7C">7C</option>
-                                <option value="7D">7D</option>
-                                <option value="7E">7E</option>
-                                <option value="7F">7F</option>
-                            </optgroup>
-                            <optgroup label="Kelas 8">
-                                <option value="8A">8A</option>
-                                <option value="8B">8B</option>
-                                <option value="8C">8C</option>
-                                <option value="8D">8D</option>
-                                <option value="8E">8E</option>
-                                <option value="8F">8F</option>
-                            </optgroup>
-                            <optgroup label="Kelas 9">
-                                <option value="9A">9A</option>
-                                <option value="9B">9B</option>
-                                <option value="9C">9C</option>
-                                <option value="9D">9D</option>
-                                <option value="9E">9E</option>
-                                <option value="9F">9F</option>
-                            </optgroup>
+                            <optgroup label="Kelas 7"><option value="7A">7A</option><option value="7B">7B</option><option value="7C">7C</option><option value="7D">7D</option><option value="7E">7E</option><option value="7F">7F</option></optgroup>
+                            <optgroup label="Kelas 8"><option value="8A">8A</option><option value="8B">8B</option><option value="8C">8C</option><option value="8D">8D</option><option value="8E">8E</option><option value="8F">8F</option></optgroup>
+                            <optgroup label="Kelas 9"><option value="9A">9A</option><option value="9B">9B</option><option value="9C">9C</option><option value="9D">9D</option><option value="9E">9E</option><option value="9F">9F</option></optgroup>
                         </select>
                     </div>
-
-                    <!-- Pilihan Hadir/Izin/Sakit -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Keterangan Hari Ini</label>
                         <div class="grid grid-cols-3 gap-3">
-                            <label class="status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-blue-50 border-blue-600 text-blue-700 font-bold text-sm shadow-sm">
-                                <input type="radio" name="status" value="Hadir" checked class="hidden">
-                                Hadir
-                            </label>
-                            <label class="status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-white border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50">
-                                <input type="radio" name="status" value="Izin" class="hidden">
-                                Izin
-                            </label>
-                            <label class="status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-white border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50">
-                                <input type="radio" name="status" value="Sakit" class="hidden">
-                                Sakit
-                            </label>
+                            <label class="status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-blue-50 border-blue-600 text-blue-700 font-bold text-sm shadow-sm"><input type="radio" name="status" value="Hadir" checked class="hidden">Hadir</label>
+                            <label class="status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-white border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50"><input type="radio" name="status" value="Izin" class="hidden">Izin</label>
+                            <label class="status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-white border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50"><input type="radio" name="status" value="Sakit" class="hidden">Sakit</label>
                         </div>
                     </div>
-
-                    <!-- Input Alasan (Disembunyikan secara default menggunakan inline style) -->
                     <div id="alasanContainer" style="display: none;">
-                        <label for="alasan" class="block text-sm font-semibold text-slate-700 mb-1.5">Alasan Keterangan</label>
-                        <textarea id="alasan" rows="3" placeholder="Tuliskan alasannya dengan jelas..." class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-slate-50 focus:bg-white"></textarea>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Alasan Keterangan</label>
+                        <textarea id="alasan" rows="3" placeholder="Tuliskan alasannya..." class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"></textarea>
                     </div>
 
                     <div id="statusMessage" style="display: none;" class="p-4 rounded-xl text-sm font-medium"></div>
@@ -127,12 +88,27 @@
             </div>
         </div>
 
-        <!-- ==================== TAB 2: DATA REKAPITULASI ==================== -->
+        <!-- TAB 2: DATA REKAPITULASI -->
         <div id="viewData" style="display: none;" class="fade-in">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                
+                <!-- HEADER TABEL & FITUR SORTIR -->
+                <div class="bg-slate-100 px-5 py-3 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Daftar Kehadiran</span>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <label for="sortDropdown" class="text-xs font-semibold text-slate-600">Urutkan:</label>
+                        <select id="sortDropdown" class="text-sm border border-slate-300 rounded-lg px-3 py-1.5 outline-none bg-white cursor-pointer focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none">
+                            <option value="terbaru">Paling Baru</option>
+                            <option value="terlama">Paling Lama</option>
+                            <option value="nama">Nama (A-Z)</option>
+                            <option value="kelas">Kelas (7A - 9F)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-left border-collapse min-w-[600px]">
-                        <thead class="bg-slate-100 text-slate-600 text-xs uppercase tracking-wider">
+                        <thead class="bg-white border-b border-slate-200 text-slate-600 text-xs uppercase tracking-wider">
                             <tr>
                                 <th class="px-5 py-4 font-semibold">Nama</th>
                                 <th class="px-5 py-4 font-semibold text-center">Kelas</th>
@@ -142,11 +118,7 @@
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="divide-y divide-slate-100 text-sm">
-                            <tr>
-                                <td colspan="5" class="px-5 py-10 text-center text-slate-500 font-medium">
-                                    Memuat Data Database...
-                                </td>
-                            </tr>
+                            <tr><td colspan="5" class="px-5 py-10 text-center text-slate-500">Memuat Data...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -154,70 +126,86 @@
         </div>
     </main>
 
-    <!-- ========================================================================= -->
-    <!-- SCRIPT 1: LOGIKA TAMPILAN UI (BERJALAN TANPA TERGANTUNG DATABASE) -->
-    <!-- ========================================================================= -->
-    <script>
-        // 1. Logika Tab / Pindah Halaman
-        const btnForm = document.getElementById('tabFormBtn');
-        const btnData = document.getElementById('tabDataBtn');
-        const viewForm = document.getElementById('viewForm');
-        const viewData = document.getElementById('viewData');
+    <!-- SCRIPT UTAMA -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        btnForm.addEventListener('click', () => {
-            btnForm.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-white text-blue-700 shadow-sm transition-all";
-            btnData.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md text-slate-600 hover:text-slate-900 transition-all";
-            viewForm.style.display = 'block';
-            viewData.style.display = 'none';
-        });
+        // =========================================================
+        // 1. PENGATURAN FIREBASE (SUDAH DIMASUKKAN)
+        // =========================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUiUOTAQahW0AHK6w1wmbVrkZV8p3ARfw",
+            authDomain: "nanaonan-projek.firebaseapp.com",
+            databaseURL: "https://nanaonan-projek-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "nanaonan-projek",
+            storageBucket: "nanaonan-projek.firebasestorage.app",
+            messagingSenderId: "909846530493",
+            appId: "1:909846530493:web:45f20d3904e9b046cd6ad4"
+        };
 
-        btnData.addEventListener('click', () => {
-            btnData.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-white text-blue-700 shadow-sm transition-all";
-            btnForm.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md text-slate-600 hover:text-slate-900 transition-all";
-            viewForm.style.display = 'none';
-            viewData.style.display = 'block';
-        });
-
-        // 2. Logika Pemilihan Izin / Sakit / Hadir
-        const statusRadios = document.querySelectorAll('input[name="status"]');
-        const alasanContainer = document.getElementById('alasanContainer');
-        const alasanInput = document.getElementById('alasan');
-
-        statusRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                // Reset semua label jadi warna putih/abu
-                document.querySelectorAll('.status-label').forEach(label => {
-                    label.className = "status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-white border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50";
-                });
-                
-                // Warnai biru untuk label yang sedang diklik
-                const activeLabel = this.parentElement;
-                activeLabel.className = "status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-blue-50 border-blue-600 text-blue-700 font-bold text-sm shadow-sm";
-
-                // Munculkan text area alasan jika Izin/Sakit
-                if(this.value === 'Hadir') {
-                    alasanContainer.style.display = 'none';
-                    alasanInput.removeAttribute('required');
-                } else {
-                    alasanContainer.style.display = 'block';
-                    alasanInput.setAttribute('required', 'true');
-                }
-            });
-        });
-
-        // Array Kosong Global untuk Data Table (nanti diisi database)
+        // Cek apakah user sudah memasukkan config asli atau masih dummy
+        const isFirebaseReady = !firebaseConfig.apiKey.includes("API_KEY_ANDA");
+        
+        let db = null;
+        let absensiRef = null;
         window.daftarAbsensi = [];
 
-        // Fungsi Render Data ke Tabel
+        // Ubah Indikator Status di Header
+        const statusBadge = document.getElementById('dbStatusBadge');
+        if (isFirebaseReady) {
+            statusBadge.textContent = "Online (Firebase)";
+            statusBadge.className = "ml-2 px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 uppercase tracking-wider";
+            
+            // Inisialisasi Firebase
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            absensiRef = collection(db, 'absensi_english_club');
+
+            // Ambil data dari Firebase secara real-time
+            onSnapshot(absensiRef, (snapshot) => {
+                window.daftarAbsensi = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderTable();
+            });
+        } else {
+            // JIKA BELUM ADA FIREBASE: Ambil data dari LocalStorage Browser
+            const localData = localStorage.getItem('dataAbsenLokal');
+            if (localData) {
+                window.daftarAbsensi = JSON.parse(localData);
+            }
+            renderTable();
+        }
+
+        // =========================================================
+        // 2. FUNGSI SORTIR & RENDER TABEL
+        // =========================================================
+        function getTimestamp(item) {
+            // Menyatukan format waktu Firebase dan waktu Lokal
+            if (item.timestamp && typeof item.timestamp.toMillis === 'function') return item.timestamp.toMillis();
+            if (item.timestamp && typeof item.timestamp === 'number') return item.timestamp;
+            return 0;
+        }
+
         window.renderTable = function() {
             const tbody = document.getElementById('tableBody');
             if (window.daftarAbsensi.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="px-5 py-10 text-center text-slate-500">Belum ada data / Mode Offline</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="px-5 py-10 text-center text-slate-500 font-medium">Belum ada data absensi.</td></tr>`;
                 return;
             }
-            tbody.innerHTML = window.daftarAbsensi.map(item => {
+
+            // Logika Sortir Data
+            let sortedData = [...window.daftarAbsensi];
+            const sortType = document.getElementById('sortDropdown').value;
+
+            if (sortType === 'terbaru') sortedData.sort((a,b) => getTimestamp(b) - getTimestamp(a));
+            else if (sortType === 'terlama') sortedData.sort((a,b) => getTimestamp(a) - getTimestamp(b));
+            else if (sortType === 'nama') sortedData.sort((a,b) => a.nama.localeCompare(b.nama));
+            else if (sortType === 'kelas') sortedData.sort((a,b) => a.kelas.localeCompare(b.kelas));
+
+            // Tampilkan ke HTML
+            tbody.innerHTML = sortedData.map(item => {
                 let badge = item.status === 'Hadir' ? 'bg-green-100 text-green-700' : (item.status === 'Izin' ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700');
-                let timeStr = item.timestamp ? new Date(item.timestamp.toMillis()).toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'}) : 'Baru saja';
+                let timeStr = item.timestamp ? new Date(getTimestamp(item)).toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'}) : '-';
                 
                 return `
                     <tr class="hover:bg-slate-50 transition-colors">
@@ -225,47 +213,49 @@
                         <td class="px-5 py-4 text-center"><span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md font-bold text-xs">${item.kelas}</span></td>
                         <td class="px-5 py-4 text-center"><span class="px-3 py-1 rounded-full text-xs font-bold ${badge}">${item.status}</span></td>
                         <td class="px-5 py-4 text-center text-slate-500 text-xs">${timeStr}</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs truncate max-w-[150px]">${item.alasan}</td>
+                        <td class="px-5 py-4 text-slate-600 text-xs truncate max-w-[150px]" title="${item.alasan}">${item.alasan}</td>
                     </tr>`;
             }).join('');
         };
-    </script>
 
+        // =========================================================
+        // 3. LOGIKA TOMBOL & FORM (ANTI-MACET)
+        // =========================================================
+        document.getElementById('sortDropdown').addEventListener('change', renderTable);
 
-    <!-- ========================================================================= -->
-    <!-- SCRIPT 2: DATABASE FIREBASE (DIPISAHKAN AGAR ERROR TIDAK MERUSAK UI) -->
-    <!-- ========================================================================= -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // Tab Navigation
+        const btnForm = document.getElementById('tabFormBtn');
+        const btnData = document.getElementById('tabDataBtn');
+        btnForm.addEventListener('click', () => {
+            btnForm.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-white text-blue-700 shadow-sm transition-all";
+            btnData.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md text-slate-600 hover:text-slate-900 transition-all";
+            document.getElementById('viewForm').style.display = 'block';
+            document.getElementById('viewData').style.display = 'none';
+        });
+        btnData.addEventListener('click', () => {
+            btnData.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md bg-white text-blue-700 shadow-sm transition-all";
+            btnForm.className = "flex-1 sm:flex-none flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-md text-slate-600 hover:text-slate-900 transition-all";
+            document.getElementById('viewForm').style.display = 'none';
+            document.getElementById('viewData').style.display = 'block';
+        });
 
-        // Mencegah crash jika environment tidak mengenali config server lokal
-        let db = null;
-        try {
-            let parsedConfig = { projectId: "demo-absensi-project", apiKey: "dummy" };
-            if (typeof __firebase_config !== 'undefined') {
-                parsedConfig = typeof __firebase_config === 'string' ? JSON.parse(__firebase_config) : __firebase_config;
-            }
-            const app = initializeApp(parsedConfig);
-            db = getFirestore(app);
-            
-            // Tarik data Realtime
-            let appId = typeof __app_id !== 'undefined' ? __app_id : 'default-id';
-            const absensiRef = collection(db, 'artifacts', appId, 'public', 'data', 'absensi_english_club');
-            
-            onSnapshot(absensiRef, (snapshot) => {
-                window.daftarAbsensi = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                // Urutkan dari terbaru ke terlama
-                window.daftarAbsensi.sort((a,b) => (b.timestamp?.toMillis() || 0) - (a.timestamp?.toMillis() || 0));
-                window.renderTable();
+        // Radio Button Interaksi
+        document.querySelectorAll('input[name="status"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.status-label').forEach(label => label.className = "status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-white border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50");
+                this.parentElement.className = "status-label flex items-center justify-center px-3 py-3 border-2 rounded-xl cursor-pointer bg-blue-50 border-blue-600 text-blue-700 font-bold text-sm shadow-sm";
+                
+                if(this.value === 'Hadir') {
+                    document.getElementById('alasanContainer').style.display = 'none';
+                    document.getElementById('alasan').removeAttribute('required');
+                } else {
+                    document.getElementById('alasanContainer').style.display = 'block';
+                    document.getElementById('alasan').setAttribute('required', 'true');
+                }
             });
+        });
 
-        } catch (err) {
-            console.error("Firebase tidak bisa diload (Mode Lokal):", err);
-            window.renderTable();
-        }
-
-        // Tangkap Pengiriman Form Database
+        // Submit Form
         document.getElementById('absensiForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -276,38 +266,42 @@
             const status = document.querySelector('input[name="status"]:checked').value;
             const alasan = document.getElementById('alasan').value || '-';
 
-            // Jika sistem sedang offline atau error db
-            if (!db) {
-                msgBox.style.display = 'block';
-                msgBox.className = "p-4 rounded-xl text-sm font-medium bg-amber-50 text-amber-700 mt-4";
-                msgBox.innerHTML = "Sistem database sedang offline. Silakan coba lagi nanti.";
-                return;
-            }
-
             btn.disabled = true;
             btn.textContent = "Menyimpan Data...";
 
             try {
-                let appId = typeof __app_id !== 'undefined' ? __app_id : 'default-id';
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'absensi_english_club'), {
-                    nama, kelas, status, alasan, timestamp: serverTimestamp()
-                });
-                
-                // Sukses
+                if (isFirebaseReady) {
+                    // Simpan ke Firebase Database
+                    await addDoc(absensiRef, { nama, kelas, status, alasan, timestamp: serverTimestamp() });
+                } else {
+                    // Simpan ke LocalStorage (Sebagai Fallback)
+                    await new Promise(resolve => setTimeout(resolve, 500)); // Efek loading buatan
+                    const newData = { id: Date.now().toString(), nama, kelas, status, alasan, timestamp: Date.now() };
+                    window.daftarAbsensi.push(newData);
+                    localStorage.setItem('dataAbsenLokal', JSON.stringify(window.daftarAbsensi));
+                    renderTable();
+                }
+
+                // Tampilkan Sukses
                 msgBox.style.display = 'block';
                 msgBox.className = "p-4 rounded-xl text-sm font-medium bg-green-50 text-green-700 mt-4";
                 msgBox.innerHTML = "Absensi berhasil direkam!";
                 document.getElementById('absensiForm').reset();
                 
+                // Reset Radio Button ke 'Hadir'
+                document.querySelector('input[value="Hadir"]').click();
+                
                 setTimeout(() => { 
                     msgBox.style.display = 'none'; 
                     document.getElementById('tabDataBtn').click(); 
-                }, 2000);
+                }, 1500);
 
             } catch (err) {
+                // Tampilkan Error (agar tidak stuck)
                 msgBox.style.display = 'block';
                 msgBox.className = "p-4 rounded-xl text-sm font-medium bg-red-50 text-red-700 mt-4";
-                msgBox.innerHTML = "Terjadi kesalahan koneksi internet.";
+                msgBox.innerHTML = "Gagal menyimpan. Pastikan Firestore sudah di-enable di Console.";
+                console.error(err);
             } finally {
                 btn.disabled = false;
                 btn.textContent = "Kirim Absensi";
